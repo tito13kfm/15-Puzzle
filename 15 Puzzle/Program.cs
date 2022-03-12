@@ -78,12 +78,6 @@ void PrintBoard()
     return;
 }
 
-int getIntegerFromUser(string prompt)
-{
-    System.Console.Write(prompt);
-    return int.Parse(Console.ReadLine());
-}
-
 void GetMove()
 {
     PrintBoard();
@@ -127,15 +121,7 @@ void GetMove()
 string displayValue(int i)
 {
     if (i == 0) { return "  "; }
-    if (i == 1) { return " 1"; }
-    if (i == 2) { return " 2"; }
-    if (i == 3) { return " 3"; }
-    if (i == 4) { return " 4"; }
-    if (i == 5) { return " 5"; }
-    if (i == 6) { return " 6"; }
-    if (i == 7) { return " 7"; }
-    if (i == 8) { return " 8"; }
-    if (i == 9) { return " 9"; }
+    if (i < 10) { return " " + i.ToString(); }
     return i.ToString();
 }
 
