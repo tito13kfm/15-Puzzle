@@ -58,24 +58,32 @@ void InitBoard()
 void PrintBoard()
 {
     Console.Clear();
-    Console.WriteLine("Use WASD or Arrow Keys to move");
-    Console.WriteLine("    1     2    3    4  ");
-    Console.WriteLine("  +----+----+----+----+");
+    
+    
+    Console.WriteLine("\n   ╔═══════╦═══════╦═══════╦═══════╗");
+    Console.WriteLine("   ║       ║       ║       ║       ║");
     for (int i = 0; i < 4; i++)
     {
-        System.Console.Write((i + 1) + " ");
+        if (i > 0) { Console.WriteLine("   ║       ║       ║       ║       ║"); }
+        
+        System.Console.Write("   ");
         for (int j = 0; j < 4; j++)
         {
-            Console.Write("| " + displayValue(board[i, j]) + " ");
+            Console.Write("║  " + displayValue(board[i, j]) + "   ");
             if (board[i, j] == 0)
             {
                 blankRow = i;
                 blankCol = j;
             }
         }
-        Console.Write("|\n");
-        Console.WriteLine("  +----+----+----+----+");
+        
+        Console.Write("║\n");
+        Console.WriteLine("   ║       ║       ║       ║       ║");
+        if (i < 3) { Console.WriteLine("   ╠═══════╬═══════╬═══════╬═══════╣"); }
+        else { Console.WriteLine("   ╚═══════╩═══════╩═══════╩═══════╝"); }
+        
     }
+    Console.WriteLine("\nUse WASD or Arrow Keys to move");
     return;
 }
 
@@ -108,7 +116,9 @@ void GetMove()
             targetCol = blankCol - 1;
             break;
         default:
-            return;
+            targetRow = blankRow;
+            targetCol = blankCol;
+            break;
     }
     if (targetRow < 0 || targetCol < 0) { GetMove(); }
     if (targetRow > 3 || targetCol > 3) { GetMove(); }
