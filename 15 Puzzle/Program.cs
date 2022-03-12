@@ -11,7 +11,7 @@ int[,] winningBoard = new int[4, 4] {
     {9, 10, 11, 12},
     {13, 14, 15, 0}
 };
-int blankRow = 0, blankCol = 0;
+int blankRow = 0, blankCol = 0, moves=0;
 
 
 Random random = new Random();
@@ -33,7 +33,7 @@ void CheckWin()
     }
     if (correct == 16)
     {
-        Console.WriteLine("You Win!!!!!");
+        Console.WriteLine("You Won in " + moves + " moves!!!!!");
         Console.WriteLine("Press any key to exit");
         Console.ReadKey();
     }
@@ -84,6 +84,7 @@ void PrintBoard()
         
     }
     Console.WriteLine("\nUse WASD or Arrow Keys to move");
+    Console.WriteLine("Move Number: " + moves);
     return;
 }
 
@@ -99,21 +100,25 @@ void GetMove()
         case ConsoleKey.UpArrow:
             targetRow = blankRow + 1;
             targetCol = blankCol;
+            moves++;
             break;
         case ConsoleKey.A:
         case ConsoleKey.LeftArrow:
             targetRow = blankRow;
             targetCol = blankCol + 1;
+            moves++;
             break;
         case ConsoleKey.S:
         case ConsoleKey.DownArrow:
             targetRow = blankRow - 1;
             targetCol = blankCol;
+            moves++;
             break;
         case ConsoleKey.D:
         case ConsoleKey.RightArrow:
             targetRow = blankRow;
             targetCol = blankCol - 1;
+            moves++;
             break;
         default:
             targetRow = blankRow;
