@@ -4,19 +4,16 @@
     {9, 10, 11, 12},
     {13, 14, 15, 0}
 };
-
 int[,] winningBoard = new int[4, 4] {
     {1, 2, 3, 4},
     {5, 6, 7, 8},
     {9, 10, 11, 12},
     {13, 14, 15, 0}
 };
-int blankRow = 0, blankCol = 0, moves=0;
-
+int blankRow = 0, blankCol = 0, moves = 0;
 var startTime = DateTime.Now;
-
-
 Random random = new Random();
+
 InitBoard();
 GetMove();
 
@@ -63,15 +60,14 @@ void PrintBoard()
     string time = aTimer.TotalSeconds.ToString("0.0");
     Console.Title = "15 Puzzle - " + time + " seconds elapsed";
     Console.Clear();
-    
-    
     Console.WriteLine("\n   ╔═══════╦═══════╦═══════╦═══════╗");
     Console.WriteLine("   ║       ║       ║       ║       ║");
+    
     for (int i = 0; i < 4; i++)
     {
         if (i > 0) { Console.WriteLine("   ║       ║       ║       ║       ║"); }
+        Console.Write("   ");
         
-        System.Console.Write("   ");
         for (int j = 0; j < 4; j++)
         {
             Console.Write("║  " + displayValue(board[i, j]) + "   ");
@@ -81,13 +77,15 @@ void PrintBoard()
                 blankCol = j;
             }
         }
-        
+
         Console.Write("║\n");
         Console.WriteLine("   ║       ║       ║       ║       ║");
+        
         if (i < 3) { Console.WriteLine("   ╠═══════╬═══════╬═══════╬═══════╣"); }
         else { Console.WriteLine("   ╚═══════╩═══════╩═══════╩═══════╝"); }
-        
+
     }
+   
     Console.WriteLine("\nUse WASD or Arrow Keys to move");
     Console.WriteLine("Move Number: " + moves);
     return;
@@ -99,6 +97,7 @@ void GetMove()
     int targetRow = 0;
     int targetCol = 0;
     ConsoleKeyInfo move = Console.ReadKey();
+    
     switch (move.Key)
     {
         case ConsoleKey.W:
@@ -130,6 +129,7 @@ void GetMove()
             targetCol = blankCol;
             break;
     }
+    
     if (targetRow < 0 || targetCol < 0) { GetMove(); }
     if (targetRow > 3 || targetCol > 3) { GetMove(); }
     int piece = board[targetRow, targetCol];
