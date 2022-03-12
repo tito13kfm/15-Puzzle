@@ -58,8 +58,9 @@ void InitBoard()
 void PrintBoard()
 {
     Console.Clear();
-    System.Console.WriteLine("    1     2    3    4  ");
-    System.Console.WriteLine("  +----+----+----+----+");
+    Console.WriteLine("Use WASD or Arrow Keys to move");
+    Console.WriteLine("    1     2    3    4  ");
+    Console.WriteLine("  +----+----+----+----+");
     for (int i = 0; i < 4; i++)
     {
         System.Console.Write((i + 1) + " ");
@@ -72,8 +73,8 @@ void PrintBoard()
                 blankCol = j;
             }
         }
-        System.Console.Write("|\n");
-        System.Console.WriteLine("  +----+----+----+----+");
+        Console.Write("|\n");
+        Console.WriteLine("  +----+----+----+----+");
     }
     return;
 }
