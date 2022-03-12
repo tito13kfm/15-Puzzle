@@ -13,6 +13,8 @@ int[,] winningBoard = new int[4, 4] {
 };
 int blankRow = 0, blankCol = 0, moves=0;
 
+var startTime = DateTime.Now;
+
 
 Random random = new Random();
 InitBoard();
@@ -57,6 +59,9 @@ void InitBoard()
 
 void PrintBoard()
 {
+    var aTimer = DateTime.Now - startTime;
+    string time = aTimer.TotalSeconds.ToString("0.0");
+    Console.Title = "15 Puzzle - " + time + " seconds elapsed";
     Console.Clear();
     
     
