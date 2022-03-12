@@ -84,35 +84,6 @@ int getIntegerFromUser(string prompt)
     return int.Parse(Console.ReadLine());
 }
 
-/*
-void GetMove()
-{
-    PrintBoard();
-    bool validRow = false;
-    bool validCol = false;
-    int targetRow = 0;
-    int targetCol = 0;
-
-    while (!validRow)
-    {
-        targetRow = getIntegerFromUser("\nEnter Target Row: ") - 1;
-        int distance = System.Math.Abs(targetRow - blankRow);
-        validRow = distance <= 1;
-    }
-    while (!validCol)
-    {
-        targetCol = getIntegerFromUser("\nEnter Target Column: ") - 1;
-        int distance = System.Math.Abs(targetCol - blankCol);
-        validCol = distance <= 1;
-    }
-
-    int piece = board[targetRow, targetCol];
-    board[blankRow, blankCol] = piece;
-    board[targetRow, targetCol] = 0;
-    CheckWin();
-}
-*/
-
 void GetMove()
 {
     PrintBoard();
