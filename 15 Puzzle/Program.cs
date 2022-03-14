@@ -1,4 +1,6 @@
-﻿int[,] board = new int[4, 4] {
+﻿using System.Text;
+
+int[,] board = new int[4, 4] {
     {1, 2, 3, 4},
     {5, 6, 7, 8},
     {9, 10, 11, 12},
@@ -13,8 +15,10 @@ int[,] winningBoard = new int[4, 4] {
 int blankRow = 0, blankCol = 0, moves = 0;
 var startTime = DateTime.Now;
 Random random = new Random();
-
+Console.Title = "15 Puzzle";
+Console.CursorVisible = false;
 InitBoard();
+PrintBoard();
 GetMove();
 
 void CheckWin()
@@ -56,9 +60,6 @@ void InitBoard()
 
 void PrintBoard()
 {
-    var aTimer = DateTime.Now - startTime;
-    string time = aTimer.TotalSeconds.ToString("0.0");
-    Console.Title = "15 Puzzle - " + time + " seconds elapsed";
     Console.Clear();
     Console.WriteLine("\n   ╔═══════╦═══════╦═══════╦═══════╗");
     Console.WriteLine("   ║       ║       ║       ║       ║");
@@ -70,7 +71,7 @@ void PrintBoard()
         
         for (int j = 0; j < 4; j++)
         {
-            Console.Write("║  " + displayValue(board[i, j]) + "   ");
+            Console.Write("║  " + "  " + "   ");
             if (board[i, j] == 0)
             {
                 blankRow = i;
@@ -93,7 +94,7 @@ void PrintBoard()
 
 void GetMove()
 {
-    PrintBoard();
+    AppendBoard();
     int targetRow = 0;
     int targetCol = 0;
     ConsoleKeyInfo move = Console.ReadKey();
@@ -129,7 +130,10 @@ void GetMove()
             targetCol = blankCol;
             break;
     }
-    
+
+    var aTimer = DateTime.Now - startTime;
+    string time = aTimer.TotalSeconds.ToString("0.0");
+    Console.Title = "15 Puzzle - " + time + " seconds elapsed";
     if (targetRow < 0 || targetCol < 0) { GetMove(); }
     if (targetRow > 3 || targetCol > 3) { GetMove(); }
     int piece = board[targetRow, targetCol];
@@ -147,4 +151,27 @@ string displayValue(int i)
 }
 
 
+void AppendBoard()
+{
+    var sb = new StringBuilder();
+
+    for (int i = 0; i < 4; i++) 
+    {
+        sb = new StringBuilder();
+        Console.SetCursorPosition(3,4*i + 3);
+        for (int j = 0; j <4; j++)
+        {
+            sb.Append("║  " + displayValue(board[i, j]) + "   ");
+            if (board[i, j] == 0)
+            {
+                blankRow = i;
+                blankCol = j;
+            }
+
+        }
+        Console.Write(sb);
+    }
+    Console.SetCursorPosition(0, 0);
+    return;
+}
 
