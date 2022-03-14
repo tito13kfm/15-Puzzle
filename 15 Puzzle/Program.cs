@@ -12,6 +12,8 @@ int[,] winningBoard = new int[4, 4] {
     {9, 10, 11, 12},
     {13, 14, 15, 0}
 };
+int correct;
+bool valid;
 int blankRow = 0, blankCol = 0, moves = 0;
 var startTime = DateTime.Now;
 Random random = new Random();
@@ -23,19 +25,10 @@ GetMove();
 
 void CheckWin()
 {
-    int correct = 0;
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
-            if (board[i, j] == winningBoard[i, j])
-            {
-                correct++;
-            }
-        }
-    }
+    CountCorrect(board, winningBoard);
     if (correct == 16)
     {
+        Console.Clear();
         Console.WriteLine("You Won in " + moves + " moves!!!!!");
         Console.WriteLine("Press any key to exit");
         Console.ReadKey();
@@ -56,6 +49,8 @@ void InitBoard()
             board[k, l] = tmp;
         }
     }
+    if (CheckValid(board, winningBoard)){ return; }
+    else { InitBoard(); }
 }
 
 void PrintBoard()
@@ -171,7 +166,35 @@ void AppendBoard()
         }
         Console.Write(sb);
     }
-    Console.SetCursorPosition(0, 0);
+    Console.SetCursorPosition(13, 20);
+    Console.Write(moves);
     return;
 }
 
+bool CheckValid(int[,] tryBoard, int[,] checkBoard)
+{
+    CountCorrect(board, winningBoard);
+    if ((correct+blankRow+1) %2 == 0)
+    {
+        valid = true;
+        return valid;
+    }
+    else { return valid;}
+}
+
+int CountCorrect(int[,] tryBoard, int[,] checkBoard)
+{
+    valid = false;
+    correct = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (tryBoard[i, j] == checkBoard[i, j])
+            {
+                correct++;
+            }
+        }
+    }
+    return correct;
+}
